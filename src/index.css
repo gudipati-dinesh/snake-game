@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Press+Start+2P&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-pixel: "Press Start 2P", system-ui, sans-serif;
+  --font-mono: "Silkscreen", monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-[#000000] text-[#00FFFF] m-0 p-0 overflow-hidden font-mono;
+    background-image: 
+      radial-gradient(circle at 50% 50%, #111 0%, #000 100%),
+      repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 2px);
+  }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@layer utilities {
+  .animate-glitch {
+    animation: glitch 0.2s infinite;
+  }
+  .scanline {
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.1), transparent);
+    animation: scanline 4s linear infinite;
+  }
+  .noise {
+    @apply absolute inset-0 pointer-events-none opacity-[0.05];
+    background-image: url('https://media.giphy.com/media/oEI9uWUicKgR6/giphy.gif');
+  }
+  .grid-cols-20 {
+    grid-template-columns: repeat(20, minmax(0, 1fr));
+  }
+  .grid-rows-20 {
+    grid-template-rows: repeat(20, minmax(0, 1fr));
+  }
+}
